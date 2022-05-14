@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+        #comment, .result {
+            width: 360px;
+            min-height: 130px;
+            resize: vertical;
+            font-family: Gibson,Tahoma,Arial,sans-serif;
+            color:rgb(80, 55, 129);
+            border-radius: 8px;
+            background-color: rgba(225, 244, 243, 0.938);
+            border: 2px solid rgba(125, 244, 243);
+            box-shadow: 0 3px 5px rgba(249, 195, 195, 0.938);
+            font-size: 16px;
+            padding: 20px;
+            margin-left: 30px;}
+        .result {
+            margin-bottom: 30px;
+        }     
+
+          
+        
+        .btn {
+            width: 170px;
+            height: 30px;
+            font-family: Gibson,Tahoma,Arial,sans-serif;
+            color:rgb(80, 55, 129);
+            border: 2px solid rgba(255, 204, 202, 0.938);
+            border-radius: 8px;
+            background-color: rgba(249, 229, 225, 0.938);
+            box-shadow: 0 3px 5px rgb(0 0 0 / 25%);
+            font-size: 16px;
+            margin: 30px;
+            
+            
+        }
+        #errormessage {     
+    padding-left: 30px;
+    font-size: 12px;
+    color: rgb(207, 58, 58);
+    font-weight: bolder;}
+    </style>    
+
+
+    <title>Document</title>
+</head>
+<body>
+    <div>
+         <div>
+            <input id="comment" type="textarea" placeholder="Your comment" maxlength="250">
+        </div>           
+        <div id="errormessage"></div>   
+        <button class="btn" onclick="checkSpam()">Send </button>  
+        <button class="btn" onclick="remove()">Reset</button>  
+        <div id="result1" class="result"> </div> 
+        <div id="result2" class="result"> </div> 
+        <div id="result3"class="result"> </div> 
+        
+        
+                   
+    </div>
+
+    <script>
+        let commentTask = document.getElementById('comment').value;
+        let text1 = localStorage.getItem('comment1');            
+        let text2 = localStorage.getItem('comment2');          
+        let text3 = localStorage.getItem('comment3');
+            
+      document.addEventListener("DOMContentLoaded", function(event) {                 
+           if (text1 != null) {
+               document.getElementById("result1").value = text1;
+           } ;           
+           if (text2 != null) {
+               document.getElementById("result2").value = text2;
+           }   ;         
+           if (text3 != null) {
+               document.getElementById("result3").value = text3;
+           } ;           
+           
+      })
+
+       function sendMessage() {           
+
+           document.getElementById('result1').innerHTML = text1;
+           document.getElementById('result2').innerHTML = text2;
+           document.getElementById('result3').innerHTML = text3;
+      }
+
+        function checkSpam() {
+           
+            if (commentTask == '') {
+                document.getElementById('errormessage').innerHTML = "Please enter the comment";
+              }    
+            if(localStorage.getItem('comment1') == null)
+            {
+                localStorage.setItem('comment1', commentTask);
+            }
+            else if(localStorage.getItem('comment2') == null)
+            {
+                localStorage.setItem('comment2', commentTask);
+            }
+            else if(localStorage.getItem('comment3') == null)
+            {
+                localStorage.setItem('comment3', commentTask);
+            }        
+
+
+         sendMessage();
+          
+            
+        }  
+        function remove() {
+            localStorage.clear();
+
+        }
+
+     
+    
+
+    </script>
+</body>
